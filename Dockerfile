@@ -29,7 +29,6 @@ RUN sudo apt-get update && sudo apt-get install -y -q git subversion nodejs npm 
     mkdir /opt/apache-maven-$MAVEN_VERSION/ && \
     sudo wget -qO- "https://archive.apache.org/dist/maven/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" | sudo tar -zx --strip-components=1 -C /opt/apache-maven-$MAVEN_VERSION/
 
-
 # Prepare env
 RUN echo "export JAVA_HOME=$JAVA_HOME" >> /home/user/.bashrc && \
     echo "export M2_HOME=$M2_HOME" >> /home/user/.bashrc && \
