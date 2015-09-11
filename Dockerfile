@@ -14,6 +14,9 @@ ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 ADD jdk-8u45-linux-x64.tar.gz /opt
 ADD apache-maven-3.2.2-bin.tar.gz /opt
 
+# Change default mirror
+RUN sudo sed -i "s@http://http.debian.net@http://mirrors.ucr.ac.cr@" /etc/apt/sources.list
+
 # Install required pckgs
 RUN sudo apt-get update && sudo apt-get install -y -q git subversion nodejs npm build-essential && \
     sudo apt-get clean all && \
@@ -35,6 +38,11 @@ RUN echo "export JAVA_HOME=$JAVA_HOME" >> /home/user/.bashrc && \
 # Add plugins as assembly dependencies.
 RUN cd /home/user/repo && \
     sed -i "0,/.*<dependency>.*/s@@                <dependency>\n\
+            <groupId>org.eclipse.che.plugin</groupId>\n\
+            <artifactId>angularjs-completion-dto</artifactId>\n\
+            <version>\${che.plugins.version}</version>\n\
+        </dependency>\n\
+        <dependency>\n\
             <groupId>org.eclipse.che.plugin</groupId>\n\
             <artifactId>angularjs-core-client</artifactId>\n\
             <version>\${che.plugins.version}</version>\n\
@@ -212,6 +220,11 @@ RUN cd /home/user/repo && \
         <dependency>\n\
             <groupId>org.eclipse.che.plugin</groupId>\n\
             <artifactId>che-plugin-tour-hopscotch</artifactId>\n\
+            <version>\${che.plugins.version}</version>\n\
+        </dependency>\n\
+        <dependency>\n\
+            <groupId>org.eclipse.che.plugin</groupId>\n\
+            <artifactId>che-plugin-tour-dto</artifactId>\n\
             <version>\${che.plugins.version}</version>\n\
         </dependency>\n\
         <dependency>\n\
