@@ -11,9 +11,6 @@ ENV JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX \
 
 ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 
-ADD jdk-8u45-linux-x64.tar.gz /opt
-ADD apache-maven-3.2.2-bin.tar.gz /opt
-
 # Change default mirror
 RUN sudo sed -i "s@http://http.debian.net@http://mirrors.ucr.ac.cr@" /etc/apt/sources.list
 
@@ -22,7 +19,16 @@ RUN sudo apt-get update && sudo apt-get install -y -q git subversion nodejs npm 
     sudo apt-get clean all && \
     git clone -b $CHE_VERSION https://github.com/codenvy/che.git /home/user/repo  && \
     sudo ln -s /usr/bin/nodejs /usr/bin/node && \
-    sudo npm install -g grunt grunt-cli bower yo
+    sudo npm install -g grunt grunt-cli bower yo && \
+    wget \
+    --no-cookies \
+    --no-check-certificate \
+    --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+    -qO- \
+    "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-b14/jdk-$JAVA_VERSION-linux-x64.tar.gz" | sudo tar -zx -C /opt/ && \
+    mkdir /opt/apache-maven-$MAVEN_VERSION/ && \
+    sudo wget -qO- "https://archive.apache.org/dist/maven/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" | sudo tar -zx --strip-components=1 -C /opt/apache-maven-$MAVEN_VERSION/
+
 
 # Prepare env
 RUN echo "export JAVA_HOME=$JAVA_HOME" >> /home/user/.bashrc && \
