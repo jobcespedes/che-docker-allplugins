@@ -11,9 +11,6 @@ ENV JAVA_HOME=/opt/jdk$JAVA_VERSION_PREFIX \
 
 ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 
-# Change default mirror
-RUN sudo sed -i "s@http://http.debian.net@http://mirrors.ucr.ac.cr@" /etc/apt/sources.list
-
 # Install required pckgs
 RUN sudo apt-get update && sudo apt-get install -y -q git subversion nodejs npm build-essential && \
     sudo apt-get clean all && \
