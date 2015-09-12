@@ -41,8 +41,7 @@ RUN echo "export JAVA_HOME=$JAVA_HOME" >> /home/user/.bashrc && \
     sudo chmod 757 -R /home/user/.che
 
 # Add plugins as assembly dependencies.
-RUN cd /home/user/repo && \
-    sed -i "0,/.*<dependency>.*/s@@                <dependency>\n\
+RUN sed -i "0,/.*<dependency>.*/s@@                <dependency>\n\
             <groupId>org.eclipse.che.plugin</groupId>\n\
             <artifactId>angularjs-completion-dto</artifactId>\n\
             <version>\${che.plugins.version}</version>\n\
@@ -269,7 +268,8 @@ RUN sed -i "0,/.*<\/module>.*/s@@    <!-- Additional plugins-->\n\
     /home/user/repo/assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
 
 # Assembly
-RUN mvn sortpom:sort && \
+RUN cd /home/user/repo && \
+    mvn sortpom:sort && \
     mvn clean install
 
 # Remove repo folders to free up space and shrink image.
