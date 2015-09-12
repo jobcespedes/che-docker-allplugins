@@ -3,12 +3,10 @@ Dockerfile to create an image of Eclipse Che with all the plugins from the docs.
 
 Base on [Codenvy Che Dockerfile](https://github.com/codenvy/dockerfiles/tree/master/base/che) and [Che Docs](https://eclipse-che.readme.io/docs/plug-ins)
 
-[Eclipse Che](http://www.eclipse.org/che/)
+For: [Eclipse Che](http://www.eclipse.org/che/)
 
 # Example on how to create a docker image
-```
-SO distribution: Debian
-```
+> SO distribution: Debian
 ### Install Docker
 ```bash
 cd ~
