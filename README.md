@@ -28,5 +28,8 @@ docker build -t "mydocker/che:3.12.2-plugins" -f che/docker/Dockerfile che/docke
 ```
 ### Run a container
 ```bash
-docker run -it -p 8080:8080 -p 49152-49162:49152-49162 -v ~/.che:/home/user/.che -v ~/che/temp/fs-root:/home/user/che/temp/fs-root -v ~/.che:/home/user/che/temp/local-storage mydocker/che:addplugins
+docker run -it -p 8080:8080 -p 49152-49162:49152-49162 \
+  -v ~/.che:/home/user/.che \
+  -v ~/che/temp/fs-root:/home/user/che/temp/fs-root \
+  -v ~/.che:/home/user/che/temp/local-storage mydocker/che:addplugins
 ```
