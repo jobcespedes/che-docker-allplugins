@@ -7,6 +7,7 @@ For: [Eclipse Che](http://www.eclipse.org/che/)
 
 # Example on how to create a docker image
 > SO distribution: Debian
+
 ### Install Docker
 ```bash
 cd ~
