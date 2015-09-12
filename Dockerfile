@@ -235,7 +235,8 @@ RUN sed -i "0,/.*<dependency>.*/s@@                <dependency>\n\
             <groupId>org.eclipse.che.plugin</groupId>\n\
             <artifactId>che-plugin-yeoman-ext-client</artifactId>\n\
             <version>\${che.plugins.version}</version>\n\
-        </dependency>&@" /home/user/repo/assembly-sdk-war/pom.xml
+        </dependency>&@" \
+        /home/user/repo/assembly-sdk-war/pom.xml
 
 # If IDE dependency, also add it.
 RUN sed -i "0,/.*<\/module>.*/s@@    <!-- Additional plugins-->\n\
